@@ -2,29 +2,49 @@
 title: "index"
 author: "Chris Preston"
 date: "November 30, 2017"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
+    toc:  true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo=TRUE)
+library(tidyverse)
 ```
 
-## R Markdown
+# data()
+# ?mpg
+#mpg
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+## `Scatterplot`
+## `geom_point`
+```{r scatterplot}
+g <- ggplot (data=mpg, aes(x=displ, y=hwy)) 
+ g +  geom_point()
+```
+### Adding Color and shape to Scatter Plot
+```{r color}
+ggplot(data=mpg, aes(x=displ, y=hwy,color=class,shape=class))+ geom_point()
 ```
 
-## Including Plots
+### `size`
+```{r fix color}
+ggplot(data=mpg, aes(x=cty, y=hwy,color=fl,size=class))+ geom_point(alpha = 0.2, color= "blue")
+```
+## Exercsier
+```{r Exercise 1}
+ggplot(data = mpg) + 
+      geom_point(aes(x = displ, y = hwy, color = "blue"))
+```
+#blue needs to be outside of plot
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+##Geoms
+```{r geom_examples}
+ggplot (mpg, aes(x=drv, y=hwy)) +
+  geom_jitter()
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
